@@ -1,0 +1,576 @@
+:root {
+    --primary: #ff8a00;
+    --primary-hover: #e67e00;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --background: #ffffff;
+    --background-secondary: #f9f9f9;
+    --border: #e5e5e5;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
+    color: var(--text-primary);
+    background-color: var(--background);
+    line-height: 1.6;
+}
+
+.food-website {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Navigation Styles */
+.nav-header {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--background);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Desktop Navigation */
+.desktop-nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 2rem;
+}
+
+.desktop-nav li {
+    font-weight: 500;
+}
+
+.desktop-nav li a {
+    color: var(--text-primary);
+    transition: color 0.2s;
+    /* animated color duration 200 milliseconds */
+}
+
+.desktop-nav li a:hover {
+    color: var(--primary-hover);
+}
+
+.desktop-nav li.active a {
+    color: var(--primary);
+}
+
+/* Auth button */
+.auth-button .login-btn {
+    background-color: var(--background);
+    color: var(--primary);
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    border: var(--primary) solid 1px;
+    cursor: pointer;
+}
+
+.auth-button .login-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Mobile menu button */
+.mobile-nav {
+    display: none;
+    padding: 1rem 0;
+}
+
+.mobile-nav li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.mobile-nav li:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav li a {
+    color: var(--text-primary);
+    font-weight: 500;
+    display: block;
+}
+
+.mobile-auth {
+    margin-top: 1rem;
+}
+
+.mobile-auth .mobile-login-btn {
+    background-color: #ff8a00;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+}
+
+.mobile-menu-btn {
+    display: none;
+}
+
+
+/* Responsive Styles Screen < 768px */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
+
+    .auth-button {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+}
+
+/* Hero section */
+.hero {
+    padding: 0.5rem 0;
+    text-align: center;
+}
+
+.hero-content {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-text {
+    width: 100%;
+    z-index: 1;
+    text-align: left;
+}
+
+.hero-text p {
+    text-align: left;
+    margin: 1rem 0;
+}
+
+.hero-image {
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img {
+    max-width: 350px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    color: var(--text-secondary);
+    max-width: 600px;
+    font-size: 1.1rem;
+}
+
+.btn-accent {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+}
+
+.text-accent {
+    color: var(--primary);
+    padding: 0 0.4rem;
+}
+
+/* Meal Card */
+.meal-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.meal-card {
+    background-color: var(--background);
+    border-radius: var(--border-radius);
+    transition: transform 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: var(--border) solid 1px;
+    padding: 1rem;
+}
+
+.meal-card:hover {
+    transform: translateX(-5px);
+}
+
+.meal-info .meal-img img {
+    width: 100%;
+    min-height: 400px;
+    object-fit: cover;
+}
+
+.meal-content h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    display: block;
+    line-height: 2rem;
+    min-height: 4rem;
+
+}
+
+.meal-content p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.section-header {
+    text-align: center;
+}
+
+.section-header h2 {
+    color: var(--text-primary);
+    font-size: 2rem;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.meal-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.meal-action button {
+    background-color: var(--background);
+    color: var(--text-primary);
+    padding: 0.8rem 2rem;
+    border: var(--text-secondary) solid 1px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: transform 2s;
+    font-weight: 600;
+}
+
+.primary-button {
+    background-color: var(--background);
+    color: var(--text-primary);
+    padding: 0.8rem 2rem;
+    border: var(--text-secondary) solid 1px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: transform 2s;
+    font-weight: 600;
+}
+
+.primary-button:hover {
+    background-color: var(--primary);
+    color: var(--border);
+    border: var(--border) solid 1px;
+    color: white;
+}
+
+.icon-button {
+    background-color: var(--background);
+    cursor: pointer;
+    border: var(--background) solid 1px;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+}
+
+.icon-button:hover {
+    background-color: var(--primary);
+
+}
+
+
+.seconds-button {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    border: var(--border) solid 1px;
+    cursor: pointer;
+}
+
+.seconds-button:hover {
+    background-color: var(--background);
+    color: var(--text-primary);
+    border: var(--text-primary) solid 1px;
+}
+
+
+.meal-action button:hover {
+    background-color: var(--primary);
+    color: var(--border);
+    border: var(--border) solid 1px;
+    color: white;
+}
+
+.popular-recipe,
+.by-category {
+    background-color: #FFFBF5;
+}
+
+.popular-recipe .container,
+.by-category .container {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
+.category-card {
+    background-color: var(--background);
+    border-radius: var(--border-radius);
+    transition: transform 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: var(--border) solid 1px;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    background-color: var(--primary-hover);
+    transform: translateX(-5px);
+    color: white;
+}
+
+.category-img img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.category-action {
+    border-top: var(--border) solid 1px;
+}
+
+.category-action-list ul {
+    list-style: disc;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-evenly;
+    margin-top: 0.5rem;
+}
+
+.category-action-list li {
+    font-size: 1rem;
+}
+
+section {
+    margin: 2rem 0;
+}
+
+.category-page {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Meal details */
+.detail-meal-page {
+    margin-top: 10px;
+    padding: 1rem;
+}
+
+.detail-meal-page .meal-info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.ingredient-container {
+    background-color: var(--background-secondary);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    overflow: hidden;
+    border: var(--border) solid 1px;
+    transition: transform 0.3s;
+    width: 35%;
+    min-height: 500px;
+}
+
+.meal-card .meal-img img {
+    width: 100%;
+    object-fit: cover;
+    padding: 0.1rem;
+    border-radius: var(--border-radius);
+
+}
+
+.meal-info .meal-img img {
+    width: 100%;
+    object-fit: cover;
+    min-height: 500px;
+}
+
+.meal-info .meal-img {
+    width: 65%;
+    border-radius: var(--border-radius);
+}
+
+.meal-card .meal-img {
+    border-radius: var(--border-radius);
+}
+
+.ingredient-container h2 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+}
+
+.ingredient-container ul {
+    list-style: disc;
+    padding: 1rem;
+
+}
+
+.ingredient-container ul li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    padding: 0.2rem;
+}
+
+.ingredient-container ul li::marker {
+    color: var(--primary);
+}
+
+.instruction-container {
+    background-color: var(--background-secondary);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    overflow: hidden;
+    border: var(--border) solid 1px;
+    transition: transform 0.3s;
+    width: 100%;
+}
+
+.instruction-container h2 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+}
+
+.instruction-container ul {
+    padding: 1rem;
+}
+
+.instruction-container ul li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    padding: 0.2rem;
+    list-style: decimal;
+}
+
+.instruction-container ul li::marker {
+    color: var(--primary);
+}
+
+.meal-name {
+    width: 70%;
+    text-align: left;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Category page */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Full height of the viewport */
+}
+
+.auth-container .container {
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px; /* Adjust width */
+    max-height: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: var(--border) solid 1px;
+    border-radius: var(--border-radius);
+}
+/* Input */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.input-group input {
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.input:focus {
+    border-color: #007bff;
+}
+
+.input-error {
+    border-color: red;
+}
+
+.input-error-message {
+    color: red;
+    font-size: 12px;
+}
