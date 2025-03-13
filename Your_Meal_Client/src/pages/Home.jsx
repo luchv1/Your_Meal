@@ -9,6 +9,7 @@ import useHttp from "../hooks/useHttp";
 import Button from "../components/ui/Button.jsx";
 
 const init =  {};
+
 const Home = () => {
     const {
         data,
