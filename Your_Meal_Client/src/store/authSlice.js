@@ -7,10 +7,7 @@ const initialState = {
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: {
-        email: null,
-        password: null,
-    },
+    initialState,
     reducers: {
         saveAuth(state, actions) {
             const email = actions.payload.email;

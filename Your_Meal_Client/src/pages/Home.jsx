@@ -1,30 +1,38 @@
 import { Link } from "react-router-dom";
 // import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchSeaFoodMeal} from "../store/mealSlice.js";
+import { startLoading, endLoading } from "../store/loadingSlice.js"
+
 
 import chefImg from "/chef.png"
 import MealCard from "../components/ui/MealCard.jsx";
 import CategoryCard from "../components/ui/CategoryCard.jsx";
 import SectionImg from "/section-img.png";
-import useHttp from "../hooks/useHttp";
 import Button from "../components/ui/Button.jsx";
-
-const init =  {};
+import Loader from "../components/ui/Loader.jsx";
 
 const Home = () => {
-    const {
-        data,
-        isLoading,
-        error,
-        sendRequest,
-        clearData
-    } = useHttp('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood',init, []);
-    const loadMeal = data;
-    const Meals = loadMeal?.meals?.sort(() => 0.5 - Math.random()).slice(0,4);
+    const dispatch = useDispatch();
+    const [Meals, setMeals] = useState();
+    const { data, isLoading, error } = useSelector((state) => state.meal);
+    const loading = useSelector((state) => state.loading);
 
-    const recipeCollection = loadMeal?.meals?.slice(15, 19);
+    useEffect(() => {
+        dispatch(startLoading());
+        dispatch(fetchSeaFoodMeal());
+    }, [dispatch]);
+
+    useEffect(()=> {
+        if (data?.meals) {
+            setMeals(data.meals);
+            dispatch(endLoading());
+        }
+    }, [data, dispatch])
     return (
         <main>
-            {isLoading && 
+            {!isLoading && 
             <>
                 <section className="hero">
                     <div className="container">
@@ -57,7 +65,7 @@ const Home = () => {
                             <p>Discover new flavors and cooking techniques with our diverse selection of cuisine types.</p>
                         </div>
                         <div className="meal-cards">
-                            {Meals && Meals.map((meal) => (
+                            {Meals && Meals?.slice(0,4).map((meal) => (
                                 <MealCard 
                                     key={meal.idMeal}
                                     name={meal.strMeal}
@@ -88,7 +96,7 @@ const Home = () => {
                                 </p>
 
                                 <Link to="/">
-                                    <Button classes="seconds-button"> </Button>
+                                    <Button classes="seconds-button"> Collection </Button>
                                 </Link>
                             </div>
 
@@ -105,7 +113,7 @@ const Home = () => {
                             <p>Pick Your Perfect Meal</p>
                         </div>
                         <div className="meal-cards">
-                            {recipeCollection && recipeCollection.map((meal) => (
+                            {Meals && Meals?.slice(15, 19).map((meal) => (
                                 <CategoryCard
                                     key={meal.idMeal}
                                     name={meal.strMeal} 
@@ -118,7 +126,6 @@ const Home = () => {
                 </section>
             </>
             }
-            {!isLoading && <p>Loading ...</p>}
         </main>
     )
 }

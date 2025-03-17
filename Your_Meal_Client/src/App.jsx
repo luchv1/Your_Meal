@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 
 import './styles/index.css'
 
@@ -9,24 +10,29 @@ import Auth from './pages/Auth'
 import Error from './pages/Error'
 import MealDetail from './pages/MealDetail'
 import Category from './pages/Category'
+import store from './store/index.js'
 
 const router = createBrowserRouter([
     {
-        path:'/',
-        element: <RootLayout/>,
-        errorElement: <Error/>,
+        path: '/',
+        element: <RootLayout />,
+        errorElement: <Error />,
         children: [
-            { index: true, element: <Home/> },
-            { path: 'yourMeal', element: <YourMeal/> },
-            { path: 'meal/:mealId', element: <MealDetail/>},
-            { path: 'auth', element: <Auth/> },
-            { path: 'category', element: <Category/>}
+            { index: true, element: <Home /> },
+            { path: 'yourMeal', element: <YourMeal /> },
+            { path: 'meal/:mealId', element: <MealDetail /> },
+            { path: 'auth', element: <Auth /> },
+            { path: 'category', element: <Category /> }
         ]
     }
 ])
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+    return <>
+        <Provider store={store}>
+            <RouterProvider router={router}></RouterProvider>
+        </Provider>
+    </>
 }
 
 export default App
