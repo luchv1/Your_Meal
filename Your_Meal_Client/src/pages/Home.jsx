@@ -11,7 +11,6 @@ import MealCard from "../components/ui/MealCard.jsx";
 import CategoryCard from "../components/ui/CategoryCard.jsx";
 import SectionImg from "/section-img.png";
 import Button from "../components/ui/Button.jsx";
-import Loader from "../components/ui/Loader.jsx";
 
 const Home = () => {
     const dispatch = useDispatch();

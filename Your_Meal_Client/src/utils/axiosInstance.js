@@ -7,25 +7,35 @@ const API = axios.create({
     },
 });
 
-// Request Interceptor
-API.interceptors.request.use((config) => {
-    // Add Authorization token if available
-    const token = localStorage.getItem("token");
-
-    if (token) {
-        config.headers.Authorization = `Baber ${token}`
+const SPRING_BOOT_API = axios.create({
+    baseURL: "http://localhost:8080",
+    headers: {
+        "Content-Type": "application/json",
     }
+});
 
-    return config;
-})
+const interceptorsConfig = (apiInstance) => {
+    apiInstance.interceptors.request.use((config) => {
+        // Add Authorization token if available
+        const token = localStorage.getItem("token");
+    
+        if (token) {
+            config.headers.Authorization = `Baber ${token}`
+        }
+    
+        return config;
+    });
+    apiInstance.interceptors.response.use(
+        (res) => res,
+        (err) => {
+            console.error("API Error: ", err?.response?.data || "Error in global handle !");
+            return Promise.reject(err);
+        }
+    )
+}
 
-// Response Interceptor
-API.interceptors.response.use(
-    (res) => res,
-    (err) => {
-        console.error("API Error: ", err?.response?.data || "Error in global handle !");
-        return Promise.reject(err);
-    }
-)
+// add interceptors config
+interceptorsConfig(SPRING_BOOT_API);
 
-export default API;
+
+export {API, SPRING_BOOT_API};

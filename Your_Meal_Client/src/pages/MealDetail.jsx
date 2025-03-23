@@ -1,53 +1,60 @@
-import useHttp from "../hooks/useHttp";
 import { useParams } from "react-router-dom";
 import Button from "../components/ui/Button";
 import { Heart } from "lucide-react"
+import { useDispatch, useSelector } from "react-redux";
+import { use, useEffect, useState } from "react";
 
+import { startLoading, endLoading } from "../store/loadingSlice";
+import { fetchDetailMeal } from "../store/mealDetailSlice";
 
-const init = {};
 
 const MealDetail = () => {
     const paramsData = useParams();
-    const {
-        data,
-        isLoading,
-        error,
-        sendRequest,
-        clearData
-    } = useHttp(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${paramsData.mealId}`, init, []);
+    const { data, isLoading, error } = useSelector((state) => state.mealDetail);
+    const dispatch = useDispatch();
+    const [ meal, setMeal ] = useState();
+    const loading = useSelector((state) => state.loading);
 
-    const loadDetailMeal = isLoading && data;
-    const mealData = isLoading && loadDetailMeal?.meals?.[0];
-    const mealInstructions = mealData?.strInstructions?.split(".")?.filter((data) => data !== "");
-    const mealIngredient = Object.keys(mealData).filter((key) => key.startsWith("strIngredient") && mealData[key])?.map((key) => mealData[key])
-    
+    useEffect(() => {
+        dispatch(startLoading());
+        dispatch(fetchDetailMeal(paramsData.mealId));
+    }, [dispatch, paramsData.mealId])
+
+    useEffect(() => {
+        if (data?.meals[0]) {
+            setMeal(data?.meals[0]);
+            dispatch(endLoading());
+        }
+    }, [data, dispatch]);
+
+    const mealInstructions = meal?.strInstructions?.split(".")?.filter((data) => data !== "");
+    const mealIngredient = meal ? Object.keys(meal).filter((key) => key.startsWith("strIngredient") && meal[key])?.map((key) => meal[key]) : null;    
     return (
         <div className="detail-meal-page">
-            {!isLoading && <div className="container">Loading meal ...</div>}
-            {isLoading && <div className="container">
+            {!isLoading && <div className="container">
                 <div className="meal-info">
                     <div className="meal-img">
-                        <img src={mealData.strMealThumb} alt="" />
+                        <img src={meal?.strMealThumb} alt="" />
                     </div>
                     <div className="ingredient-container">
                         <h2 className="ingredient-title">Ingredients</h2>
                         <ul>
                             {mealIngredient && 
-                                mealIngredient.map((ingredient) => 
-                            <li key={ingredient}>{ingredient}</li>)}
+                                mealIngredient.map((ingredient, index) => 
+                            <li key={index}>{ingredient}</li>)}
                         </ul>
                     </div>
                 </div>
                 <div className="meal-name">
-                    <h2>{mealData.strMeal}</h2>
+                    <h2>{meal?.strMeal}</h2>
                     <Button classes="icon-button" >{< Heart size={40}/>}</Button>
                     <p></p>
                 </div>
                 <div className="instruction-container">
                     <h2>Step-by-Step Instructions</h2>
                     <ul>
-                        {mealInstructions.map((step) => 
-                            <li key={step}>{step}</li>
+                        {mealInstructions?.map((step, index) => 
+                            <li key={index}>{step}</li>
                         )}
                     </ul>
                 </div>
