@@ -39,7 +39,6 @@ const SignupForm = () => {
     return (
         <div className="form-container">
             <div>
-                <h1>Sign Up</h1>
                 <p>Create an account to save your favorite recipes</p>
                 <p className="input-error-message">It will automatically register with the password: ABC123 </p>
             </div>

@@ -50,7 +50,6 @@ const LoginForm = () => {
     return (
         <div className="form-container"> 
             <div>
-                <h1>Login</h1>
                 <p>Enter your email and password to access your account</p>
             </div>
             <form action={formAction}>
