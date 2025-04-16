@@ -55,6 +55,7 @@
 - Axios
 - Tailwind CSS
 - Spring Boot + Spring Security (Backend)
+- Database PGSQL
 
 ---
 
