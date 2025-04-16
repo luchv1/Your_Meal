@@ -13,7 +13,7 @@ const MealCard = (props) => {
                 <p>There cookies are the perfect, .....</p>
             </div>
             <div className="meal-action">
-                <Link to={`meal/${props.mealId}`}>
+                <Link to={`/meal/${props.mealId}`}>
                     <Button classes="primary-button">
                         See Full Details
                     </Button>
