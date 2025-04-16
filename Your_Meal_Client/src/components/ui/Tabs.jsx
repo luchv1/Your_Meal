@@ -3,6 +3,16 @@ import { useState } from "react";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import Button from "./Button";
+const tabsData = [
+    {
+        label: "Login",
+        content: <LoginForm/>
+    },
+    {
+        label: "Sign Up",
+        content: <SignupForm/>
+    }
+];
 
 const Tabs = ({tabs, classes, init}) => {
     const [activeTab, setActiveTab] = useState(init);

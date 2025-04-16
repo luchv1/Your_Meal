@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --primary: #ff8a00;
     --primary-hover: #e67e00;
@@ -98,7 +102,7 @@ a {
     color: var(--primary-hover);
 }
 
-.desktop-nav li.active a {
+.desktop-nav a.active {
     color: var(--primary);
 }
 
@@ -624,3 +628,17 @@ section {
     flex-direction: column;
     gap: 1.4rem;
 }
+
+.login-warning {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px 25px;
+    background-color: #fff8e1;
+    color: #ff6f00;
+    border: 1px solid #ffe0b2;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-family: Arial, sans-serif;
+    }

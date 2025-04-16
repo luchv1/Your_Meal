@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Button from "../components/ui/Button";
 import { Heart } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux";
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useState, useCallback } from "react";
 
 import { startLoading, endLoading } from "../store/loadingSlice";
 import { fetchDetailMeal } from "../store/mealDetailSlice";
@@ -27,6 +27,14 @@ const MealDetail = () => {
         }
     }, [data, dispatch]);
 
+    const handleSaveMeal = (meal) => {
+        const newMeal = {
+            name: meal.strMeal,
+            image: meal.strMealThumb,
+            detail_id: meal.idMeal
+        }
+    }
+
     const mealInstructions = meal?.strInstructions?.split(".")?.filter((data) => data !== "");
     const mealIngredient = meal ? Object.keys(meal).filter((key) => key.startsWith("strIngredient") && meal[key])?.map((key) => meal[key]) : null;    
     return (
@@ -47,7 +55,7 @@ const MealDetail = () => {
                 </div>
                 <div className="meal-name">
                     <h2>{meal?.strMeal}</h2>
-                    <Button classes="icon-button" >{< Heart size={40}/>}</Button>
+                    <Button onClick={()=> handleSaveMeal(meal)} classes="icon-button" >{< Heart size={40}/>}</Button>
                     <p></p>
                 </div>
                 <div className="instruction-container">

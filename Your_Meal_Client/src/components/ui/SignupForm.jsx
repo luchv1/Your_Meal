@@ -1,5 +1,6 @@
 import { useActionState, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import Input from "./Input";
 import Button from "./Button";
@@ -11,8 +12,7 @@ const SignupForm = () => {
     const [errorValidate, setErrorValidate] = useState("");
     const [authData, setAuthData] = useState("");
     const dispatch = useDispatch();
-
-    const { data, isLoading, error } = useSelector((state) => state.auth);
+    const navigate = useNavigate();
 
     const handleSubmitForm = async (prevFormData, formData) => {
         const email = formData.get("email");
@@ -27,6 +27,7 @@ const SignupForm = () => {
         try {
             dispatch(startLoading());
             dispatch(postSignupForm(email));
+            navigate("/auth?auth=Login");
             dispatch(endLoading());
             return { error: null }
         } catch (error) {
@@ -40,13 +41,14 @@ const SignupForm = () => {
             <div>
                 <h1>Sign Up</h1>
                 <p>Create an account to save your favorite recipes</p>
+                <p className="input-error-message">It will automatically register with the password: ABC123 </p>
             </div>
             <form action={formAction}>
                 <Input 
                     label="Email"
                     type="text"
                     name="email"
-                    placeholder="Enter your email"
+                    placeholder="Enter your Email"
                     error={errorValidate || formState.error}
                 />
                 <Button type="submit" classes="seconds-button mt5 w100">Signup</Button>

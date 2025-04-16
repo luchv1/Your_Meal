@@ -8,7 +8,6 @@ const FilterMeal = () => {
                 <button className="filter-btn">By Country</button>
             </div>
             <div className="filter-options">
-                
             </div>
         </div>
     )

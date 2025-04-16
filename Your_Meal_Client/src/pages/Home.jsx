@@ -46,7 +46,7 @@ const Home = () => {
                                     we have something for every taste and occasion.
                                 </p>
 
-                                <Link to="/">
+                                <Link to="/error">
                                     <Button classes="seconds-button">Explore Recipes</Button>
                                 </Link>
                             </div>

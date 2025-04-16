@@ -7,5 +7,4 @@ const Input= ({ label, type="text", error, classes, ...props}) => {
         </div>
     )
 }
-
 export default Input;

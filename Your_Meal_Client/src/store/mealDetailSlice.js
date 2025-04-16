@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getDetailMeal } from "../api/mealApi.js";
+import { logError } from "../utils/logError.js"
 
 export const fetchDetailMeal = createAsyncThunk(
     "meal/fetchDetailMeal",
@@ -8,6 +9,7 @@ export const fetchDetailMeal = createAsyncThunk(
     try {
         return await getDetailMeal(mealId);
     } catch (error) {
+        logError("login Failed", error);
         return rejectWithValue(error.response?.data || "Something went wrong");
     }
 });
